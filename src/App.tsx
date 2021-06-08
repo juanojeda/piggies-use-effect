@@ -10,6 +10,8 @@ const PigStack = styled.div`
   align-items: flex-start;
 `;
 
+const getPiggiesArray = (count: number): any[] => Array(count).fill(null);
+
 function App() {
 
   const [piggiesCount, setPiggiesCount] = useState(0);
@@ -24,7 +26,7 @@ function App() {
     <>
       <Button onClick={handleAddPiggy} isDisabled={false} />
       <PigStack>
-        {Array(piggiesCount).fill(null).map((_, i) => (
+        {getPiggiesArray(piggiesCount).map((_, i) => (
           <Piggy key={i} index={i} />
         ))}
       </PigStack>
