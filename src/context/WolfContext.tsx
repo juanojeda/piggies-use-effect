@@ -10,8 +10,9 @@ export const WolfContext = createContext<IWolfContext|undefined>(undefined);
 export const WolfContextProvider: FC = ({ children }) => {
   
   const [huffRecord, setHuffRecord] = useState<boolean[]>([]);
+  const maxHuffs = huffRecord.length >= 3;
 
-  const addHuff = useCallback((isSuccessfulHuff: boolean) => setHuffRecord((prev) => [...prev, isSuccessfulHuff]), [setHuffRecord]);
+  const addHuff = useCallback((isSuccessfulHuff: boolean) => !maxHuffs && setHuffRecord((prev) => [...prev, isSuccessfulHuff]), [setHuffRecord, maxHuffs]);
 
   return (
     <WolfContext.Provider
