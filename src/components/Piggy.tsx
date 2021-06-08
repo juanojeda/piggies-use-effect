@@ -29,13 +29,13 @@ const Emoji = styled.i`
 
 export const Piggy: FC<IPiggyProps> = ({ index }) => {
   
-  // attempt 1: use the promise to set the material as a let
-
-  let material;
-
-   getMaterial(index).then((mat) => {
-     material = mat;
-   })
+  // attempt 2: use the promise to set the material as a useState
+  
+  const [material, setMaterial] = useState<string | null>(null);
+  
+  getMaterial(index).then((mat) => {
+    setMaterial(mat);
+  });
   
   return (
   <Tile>
