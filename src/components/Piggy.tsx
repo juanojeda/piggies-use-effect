@@ -1,6 +1,7 @@
 import {FC, useEffect, useState} from 'react';
 import styled from "styled-components";
 import { getMaterial } from '../api/getMaterial';
+import { useWolfContext } from '../context/WolfContext';
 import { Emoji } from './Emoji';
 
 import { Loading } from "./Loading";
@@ -25,15 +26,21 @@ const Tile = styled.div`
 
 export const Piggy: FC<IPiggyProps> = ({ index }) => {
   
-  // attempt 3: useEffect for async data
-
   const [material, setMaterial] = useState<string | null>(null);
+  const { addHuff } = useWolfContext();
 
   useEffect(() => {
     const fetchAndSetMaterial = async () => {
       const fetchedMaterial = await getMaterial(index);
 
       setMaterial(fetchedMaterial);
+
+      if (fetchedMaterial !== "🧱") {
+        addHuff(true);
+      }
+      else {
+        addHuff(false);
+      }
     }
 
     void fetchAndSetMaterial();
