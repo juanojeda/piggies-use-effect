@@ -26,6 +26,12 @@ const StyledButton = styled.button`
   &:active {
     transform: translateY(.4rem);
   }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: .4;
+    background: var(--black);
+  }
 `;
 
 export const Button: FC<IButtonProps> = ({onClick, isDisabled}) => (

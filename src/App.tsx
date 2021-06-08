@@ -16,15 +16,17 @@ function App() {
 
   const [piggiesCount, setPiggiesCount] = useState(0);
 
+  const isPiggedOut = piggiesCount >= 3;
+
   const handleAddPiggy = (): void => {
-    if (piggiesCount < 3) {
+    if (!isPiggedOut) {
       setPiggiesCount(i => i + 1);
     }
   };
 
   return (
     <>
-      <Button onClick={handleAddPiggy} isDisabled={false} />
+      <Button onClick={handleAddPiggy} isDisabled={isPiggedOut} />
       <PigStack>
         {getPiggiesArray(piggiesCount).map((_, i) => (
           <Piggy key={i} index={i} />
