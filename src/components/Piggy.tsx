@@ -1,5 +1,6 @@
-import {FC} from 'react';
+import {FC, useEffect, useState} from 'react';
 import styled from "styled-components";
+import { getMaterial } from '../api/getMaterial';
 
 import { Loading } from "./Loading";
 
@@ -26,16 +27,15 @@ const Emoji = styled.i`
   font-style: normal;
 `;
 
-const materials = {
-  hay: "🌾",
-  twigs: "🥢",
-  bricks: "🧱"
-}
-
-const getMaterial = (index: number): string => Object.values(materials)[index];
-
 export const Piggy: FC<IPiggyProps> = ({ index }) => {
-  const material = getMaterial(index);
+  
+  // attempt 1: use the promise to set the material as a let
+
+  let material;
+
+   getMaterial(index).then((mat) => {
+     material = mat;
+   })
   
   return (
   <Tile>
