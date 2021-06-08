@@ -14,8 +14,10 @@ const Tile = styled.div`
   background: var(--white);
   border-radius: 1rem;
   box-shadow: .1rem .1rem .2rem rgba(0,50,100,.25);
-  display: inline-block;
+  flex-grow: 0;
+  flex-shrink: 1;
   font-size: 2rem;
+  margin: 1rem;
   padding: 1rem;
 `;
 
@@ -33,11 +35,13 @@ const materials = {
 export const Piggy: FC<IPiggyProps> = ({material, index}) => (
   <Tile>
     <Emoji>🐷</Emoji>
-    +
     {
-      material ? <>
+      material ?
+        (
+          <>
         <Emoji>{materials[material]}</Emoji><Emoji>🏠</Emoji>
-      </> : <Loading />
+          </>
+        ) : <Loading />
     }
   </Tile>
 );
