@@ -32,16 +32,22 @@ const materials = {
   bricks: "🧱"
 }
 
-export const Piggy: FC<IPiggyProps> = ({material, index}) => (
+const getMaterial = (index: number): string => Object.values(materials)[index];
+
+export const Piggy: FC<IPiggyProps> = ({ index }) => {
+  const material = getMaterial(index);
+  
+  return (
   <Tile>
     <Emoji>🐷</Emoji>
     {
       material ?
         (
           <>
-        <Emoji>{materials[material]}</Emoji><Emoji>🏠</Emoji>
+        <Emoji>{material}</Emoji><Emoji>🏠</Emoji>
           </>
         ) : <Loading />
     }
   </Tile>
-);
+  )
+};
