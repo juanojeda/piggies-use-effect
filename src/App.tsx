@@ -1,25 +1,32 @@
 import styled from "styled-components";
 import { Piggy } from "./components/Piggy";
 import { Button } from "./components/Button";
+import { useState } from "react";
 
 const PigStack = styled.div`
   display: inline-flex;
   flex-direction: column;
   justify-content: flex-start;
+  align-items: flex-start;
 `;
 
 function App() {
 
-  const handleAddPiggy = (): void => {};
+  const [piggiesCount, setPiggiesCount] = useState(0);
+
+  const handleAddPiggy = (): void => {
+    if (piggiesCount < 3) {
+      setPiggiesCount(i => i + 1);
+    }
+  };
 
   return (
     <>
       <Button onClick={handleAddPiggy} isDisabled={false} />
-    <PigStack>
-      <Piggy index={0} />
-      <Piggy material="hay" index={1} />
-      <Piggy material="twigs" index={2} />
-      <Piggy material="bricks" index={3} />
+      <PigStack>
+        {Array(piggiesCount).fill(null).map((_, i) => (
+          <Piggy key={i} index={i} />
+        ))}
       </PigStack>
       </>
   );
