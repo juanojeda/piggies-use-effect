@@ -1,7 +1,11 @@
+import { useState } from "react";
 import styled from "styled-components";
+
+import { WolfContextProvider } from "./context/WolfContext";
+
 import { Piggy } from "./components/Piggy";
 import { Button } from "./components/Button";
-import { useState } from "react";
+import { WolfHuffCounter } from "./components/WolfHuffCounter";
 
 const PigStack = styled.div`
   display: inline-flex;
@@ -25,14 +29,15 @@ function App() {
   };
 
   return (
-    <>
+    <WolfContextProvider>
       <Button onClick={handleAddPiggy} isDisabled={isPiggedOut} />
       <PigStack>
         {getPiggiesArray(piggiesCount).map((_, i) => (
           <Piggy key={i} index={i} />
         ))}
       </PigStack>
-      </>
+      <WolfHuffCounter />
+      </WolfContextProvider>
   );
 }
 

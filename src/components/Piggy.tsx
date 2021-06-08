@@ -1,6 +1,7 @@
 import {FC, useEffect, useState} from 'react';
 import styled from "styled-components";
 import { getMaterial } from '../api/getMaterial';
+import { Emoji } from './Emoji';
 
 import { Loading } from "./Loading";
 
@@ -20,11 +21,6 @@ const Tile = styled.div`
   font-size: 2rem;
   margin: 1rem;
   padding: 1rem;
-`;
-
-const Emoji = styled.i`
-  font-size: 64px;
-  font-style: normal;
 `;
 
 export const Piggy: FC<IPiggyProps> = ({ index }) => {
