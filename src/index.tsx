@@ -1,12 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
-
   :root {
     --black: #2C363F;
     --pink: #E75A7C;
@@ -20,6 +18,7 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
   html {
+    font-family: 'Balsamiq Sans', cursive;
     font-size: 10px;
   }
   body {
@@ -31,6 +30,8 @@ const GlobalStyles = createGlobalStyle`
 ReactDOM.render(
   <React.StrictMode>
     <GlobalStyles />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@700&display=swap" rel="stylesheet" /> 
     <App />
   </React.StrictMode>,
   document.getElementById('root')
