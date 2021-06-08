@@ -27,7 +27,7 @@ export const WolfHuffCounter = () => {
 
   return (
     <PositionAtScreenRightBottom>
-      {huffRecord.map((isWinner) => <Emoji>{getHuffEmoji(isWinner)}</Emoji>)}
+      {huffRecord.map((isWinner, i) => <Emoji key={i}>{getHuffEmoji(isWinner)}</Emoji>)}
       {hasHuffs && <Huffing />}
       <Emoji>🐺</Emoji>
   </PositionAtScreenRightBottom>

@@ -24,6 +24,8 @@ const Tile = styled.div`
   padding: 1rem;
 `;
 
+const isSuccessfulHuff = (material: string): boolean => ["🥢", "🌾"].includes(material);
+
 export const Piggy: FC<IPiggyProps> = ({ index }) => {
   
   const [material, setMaterial] = useState<string | null>(null);
@@ -34,17 +36,17 @@ export const Piggy: FC<IPiggyProps> = ({ index }) => {
       const fetchedMaterial = await getMaterial(index);
 
       setMaterial(fetchedMaterial);
-
-      if (fetchedMaterial !== "🧱") {
-        addHuff(true);
-      }
-      else {
-        addHuff(false);
-      }
     }
 
     void fetchAndSetMaterial();
   }, [index]);
+
+  useEffect(() => {
+    if (!material) return;
+    const isSuccess = isSuccessfulHuff(material);
+
+    addHuff(isSuccess);
+  }, [material, addHuff]);
   
   return (
   <Tile>

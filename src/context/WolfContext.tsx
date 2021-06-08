@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, FC } from "react";
+import { createContext, useContext, useState, FC, useCallback } from "react";
 
 interface IWolfContext {
   huffRecord: boolean[];
@@ -11,7 +11,7 @@ export const WolfContextProvider: FC = ({ children }) => {
   
   const [huffRecord, setHuffRecord] = useState<boolean[]>([]);
 
-  const addHuff = (isSuccessfulHuff: boolean) => setHuffRecord((prev) => [...prev, isSuccessfulHuff]);
+  const addHuff = useCallback((isSuccessfulHuff: boolean) => setHuffRecord((prev) => [...prev, isSuccessfulHuff]), [setHuffRecord]);
 
   return (
     <WolfContext.Provider
