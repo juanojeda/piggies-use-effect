@@ -1,17 +1,84 @@
+## What is useEffect?
+
+- Description from the [docs](https://reactjs.org/docs/hooks-effect.html#example-using-hooks):
+  > By using this Hook, you tell React that your component needs to do something after render. React will remember the function you passed (we’ll refer to it as our “effect”), and call it later after performing the DOM updates.
+---
+
+## Anatomy of a useEffect:
+
+```js
+const MyComponent = () => {
+
+  // no assignment, because it doesn't return anything
+  useEffect(() => { // the effect function
+    // do some stuff, usually an "effectful" change
+
+    // optionally, can return a destructor, to
+    return () => {
+      //un-do some stuff
+    }
+  },
+  [ /* optionally, only run if these dependencies change */ ]);
+
+  return <div />
+}
+```
+---
+
+## Stop saying "effect"! What is an "effect"!?
+
+- From [wikipedia](https://en.wikipedia.org/wiki/Side_effect_(computer_science)):
+> In computer science, an operation, function or expression is said to have a side effect if it modifies some state variable value(s) outside its local environment
+
+- In React, the "local environment" is the Component
+---
 ## Common use-cases for useEffect
 
-- Perform a task outside of the component (ie. a side-effect), based on the state of the component
-- React to a state change from a hook, to perform some task within the component
-- The "React-way" to perform any async tasks
+- Update a value outside of the component, based on state within the component
 
-## Mental model of a useEffect
+```js
+// Example 1: Alter value outside of component
 
-- used to trigger side-effects
-- used to react to external "events"
-- used for asynchronous tasks
-- is capable of reacting to multiple "dependencies"
-- runs parallel to the react render lifecycle
-- a component can have multiple useEffects, and there can be multiple useEffects per stateful variable
+const [count, setCount] = useState(0);
+useEffect(() => {
+  document.title = `You've clicked ${count} times`
+});
+```
+---
+
+- Update a value within a component, based on a value outside a component after render
+
+```js
+// Example 2: Use an external value in component after render
+
+const [isTextTooWide, setIsTextTooWide] = useState(false);
+useEffect(() => {
+  if (getComponentTextWidthPx() > 400) {
+    setIsTextTooWide(true);
+  }
+});
+```
+---
+
+- Perform any async tasks (as it lets the reader know that something will happen sometime after render)
+
+```js
+// Example 3: Do something async
+const [isOnline, setIsOnline] = useState(false);
+
+useEffect(() => {
+  function handleStatusChange(status) {
+      setIsOnline(status.isOnline);
+    }
+
+    ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);
+});
+```
+---
+
+## What about the dependencies?
+// TODO: Fill this in
+
 
 ## Common pitfalls for useEffects
 
